@@ -17,21 +17,21 @@
       <dialog class="main__addContainer">
         <button type="button" id="addBook__closeBtn" autofocus>X</button>
         <h2>Add a new book</h2>
-        <div class="main__addInputs">
-          <label for="addBook__title">Add title:</label>
-          <input type="text" name="title" id="addBook__title" />
-          <label for="addBook__description">Add description:</label>
-          <textarea name="description" id="addBook__description"></textarea>
-          <span class="addBook__pagesAndRead">
-            <label for="addBook__pages">Add pages:</label>
-            <input type="number" name="pages" id="addBook__pages" />
-            <label for="addBook_isRead">Is Read:</label>
-            <input type="checkbox" name="read" id="addBook__isRead"
-          /></span>
-          <span class="addBook__closeAndAdd">
-            <button type="button" id="addBook__addBtn">Submit new Book</button>
-          </span>
-        </div>
+        <form id="main__addForm">
+          <div class="main__addInputs">
+            <label for="addBook__title">Add title:</label>
+            <input type="text" name="title" id="addBook__title" />
+            <label for="addBook__description">Add description:</label>
+            <textarea name="description" id="addBook__description"></textarea>
+            <span class="addBook__pagesAndRead">
+              <label for="addBook__pages">Add pages:</label>
+              <input type="number" name="pages" id="addBook__pages" />
+              <label for="addBook_isRead">Is Read:</label>
+              <input type="checkbox" name="read" id="addBook__isRead"
+            /></span>
+            <button type="submit" id="addBook__addBtn">Submit new Book</button>
+          </div>
+        </form>
       </dialog>
 
       <div class="main__library"></div>

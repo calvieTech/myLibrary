@@ -44,19 +44,19 @@ const myLibrary = [
   },
 ];
 
-const addButton = document.getElementById('main__addButton');
 const addContainer = document.querySelector('dialog');
-const closeButton = document.getElementById('addBook__closeBtn');
-const submitNewBookButton = document.getElementById('addBook__addBtn');
-const addInputs = document.getElementsByClassName('main__addInputs');
-const addBookForm = document.getElementById('main__addForm');
+const addButton = document.querySelector('#main__addButton');
+const closeButton = document.querySelector('#addBook__closeBtn');
+const submitNewBookButton = document.querySelector('#addBook__addBtn');
+const addInputs = document.querySelector('.main__addInputs');
+const addBookForm = document.querySelector('#main__addForm');
 
-function Book(id, title, description, pages, read) {
-  this.id = id;
-  this.title = title;
-  this.description = description;
-  this.pages = pages;
-  this.read = read;
+function createElement(tag, className, textContent) {
+  const elt = document.createElement(tag);
+
+  if (className) elt.className = className;
+  if (textContent) elt.textContent = textContent;
+  return elt;
 }
 
 function renderLibrary() {
@@ -64,23 +64,20 @@ function renderLibrary() {
 
   if (!lib) return -1;
 
-  myLibrary.forEach((book, idx) => {
-    const bookDiv = document.createElement('div');
+  lib.innerHTML = ''; // clear existing content
 
-    const bookTitle = document.createElement('h2');
-    bookTitle.innerText = book.title;
-    const bookDescription = document.createElement('p');
-    bookDescription.innerText = book.description;
-    const bookPages = document.createElement('p');
-    bookPages.innerText = `Pages: ${book.pages}`;
-    const bookRead = document.createElement('p');
-    bookRead.innerText = book.read ? 'Read: Already read' : 'Read: Not read';
-
-    bookDiv.className = `library__book`;
-    bookDiv.appendChild(bookTitle);
-    bookDiv.appendChild(bookDescription);
-    bookDiv.appendChild(bookPages);
-    bookDiv.appendChild(bookRead);
+  myLibrary.forEach((book) => {
+    const bookDiv = createElement('div', 'library__book');
+    bookDiv.appendChild(createElement('h2', null, book.title));
+    bookDiv.appendChild(createElement('p', null, book.description));
+    bookDiv.appendChild(createElement('p', null, `Pages: ${book.pages}`));
+    bookDiv.appendChild(
+      createElement(
+        'p',
+        null,
+        book.read ? 'Read: Already read' : 'Read: Not read'
+      )
+    );
 
     lib.appendChild(bookDiv);
   });
@@ -88,27 +85,8 @@ function renderLibrary() {
 
 function addBookToLibrary(newBook) {
   // do stuff here
-  const lib = document.querySelector('.main__library');
-  if (!lib) return -1;
-
-  const bookDiv = document.createElement('div');
-  bookDiv.className = `library__book`;
-
-  const bookTitle = document.createElement('h2');
-  bookTitle.innerText = newBook.title;
-  const bookDescription = document.createElement('p');
-  bookDescription.innerText = newBook.description;
-  const bookPages = document.createElement('p');
-  bookPages.innerText = `Pages: ${newBook.pages}`;
-  const bookRead = document.createElement('p');
-  bookRead.innerText = newBook.read ? 'Read: Already read' : 'Read: Not read';
-
-  bookDiv.appendChild(bookTitle);
-  bookDiv.appendChild(bookDescription);
-  bookDiv.appendChild(bookPages);
-  bookDiv.appendChild(bookRead);
-
-  lib.appendChild(bookDiv);
+  myLibrary.push(newBook);
+  renderLibrary();
 }
 
 addButton?.addEventListener('click', () => {
@@ -116,15 +94,21 @@ addButton?.addEventListener('click', () => {
 });
 
 closeButton?.addEventListener('click', () => {
+  addBookForm.reset();
   addContainer?.close();
 });
 
-submitNewBookButton?.addEventListener('click', (e) => {
+addBookForm?.addEventListener('submit', (e) => {
   e.preventDefault();
   const title = document.querySelector('#addBook__title');
   const description = document.querySelector('#addBook__description');
   const pages = document.querySelector('#addBook__pages');
   const read = document.querySelector('#addBook__isRead');
+
+  if (!title?.value || !description?.value || !pages?.value) {
+    alert('Please fill out all fields');
+    return -1;
+  }
 
   const newBook = {
     id: myLibrary.length + 1,
@@ -134,5 +118,9 @@ submitNewBookButton?.addEventListener('click', (e) => {
     read: read?.checked,
   };
   addBookToLibrary(newBook);
+
+  addBookForm.reset();
+  addContainer?.close();
 });
+
 renderLibrary();

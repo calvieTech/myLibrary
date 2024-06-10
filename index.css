@@ -102,10 +102,16 @@ body {
 #addBook__description {
   display: flex;
   height: 140px;
+  text-overflow: ellipsis;
   padding: 10px;
   border: 2px solid #ccc;
   border-radius: 4px;
   font-size: 18px;
+}
+
+#addBook__addBtn {
+  display: flex;
+  justify-content: center;
 }
 
 .addBook__pagesAndRead {
@@ -116,10 +122,10 @@ body {
   align-items: center;
 }
 
-.addBook__closeAndAdd {
+/* .addBook__closeAndAdd {
   display: flex;
   justify-content: space-around;
-}
+} */
 
 #addBook__addBtn {
   padding: 6px;
@@ -139,11 +145,12 @@ body {
 .main__library {
   display: flex;
   margin: 0px 4px;
-  min-height: 768px;
+  min-height: fit-content;
   /* max-width: 100%; */
   /* background-color: grey; */
-  justify-content: center;
+  /* justify-content: center; */
   gap: 14px;
+  flex-wrap: wrap;
   box-sizing: border-box;
 }
 
@@ -159,15 +166,21 @@ body {
   transition: 0.3s;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   border-radius: 8px;
   color: black;
+  text-overflow: ellipsis;
 }
 
 .library__book > h2 {
   text-align: center;
   font-size: 1.5rem;
   /* margin: 0 0 8px; */
+}
+
+.library__book > p {
+  text-overflow: ellipsis;
+  /* color: white; */
 }
 
 .library__book:hover {
