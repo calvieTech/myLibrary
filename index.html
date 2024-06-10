@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Library</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <h1 class="site__title"><strong>My Library</strong></h1>
+    <main class="main__container">
+      <div class="main__addButtonContainer">
+        <button class="main__addButton" id="main__addButton">
+          Add a new Book
+        </button>
+      </div>
+      <dialog class="main__addContainer">
+        <button type="button" id="addBook__closeBtn" autofocus>X</button>
+        <h2>Add a new book</h2>
+        <div class="main__addInputs">
+          <label for="addBook__title">Add title:</label>
+          <input type="text" name="title" id="addBook__title" />
+          <label for="addBook__description">Add description:</label>
+          <textarea name="description" id="addBook__description"></textarea>
+          <span class="addBook__pagesAndRead">
+            <label for="addBook__pages">Add pages:</label>
+            <input type="number" name="pages" id="addBook__pages" />
+            <label for="addBook_isRead">Is Read:</label>
+            <input type="checkbox" name="read" id="addBook__isRead"
+          /></span>
+          <span class="addBook__closeAndAdd">
+            <button type="button" id="addBook__addBtn">Submit new Book</button>
+          </span>
+        </div>
+      </dialog>
+
+      <div class="main__library"></div>
+    </main>
+    <script src="library.js"></script>
+  </body>
+</html>
